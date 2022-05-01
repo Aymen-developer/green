@@ -51,14 +51,28 @@
         <h3>Ajouter un Administrateur</h3>
         <form>
           <div class="formGroup">
-            <input type="email" class="formControl" placeholder="Email" #userEmail required />
+            <input type="email" id="emailx" class="formControl" placeholder="Email" #email required />
           </div>
           <div class="formGroup">
-            <input type="password" class="formControl" placeholder="Password" #userPwd required />
+            <input type="password" id="passwordx" class="formControl" placeholder="Password" #password required />
           </div>
+          <div class="formGroup">
+            <input type="text"  id="locationx" class="formControl" placeholder="Location"  required />
+          </div>
+          <label for="idtypex">Type</label>
+      <select id="typex" class="form-control" required>
+        <option selected  value="type_domestic">Domestique</option>
+        <option value="type_domestic">Domestique</option>
+        <option value="type_medical">Médical</option>
+        <option value="type_chemical">Chémique</option>
+        <option value="type_toxic">Toxique</option>
+        <option value="type_brokenroad">Route Cassée</option>
+        <option value="type_obstacleroad">R.Obstacle</option>
+        <option value="type_train">Train Panne</option>
+      </select>
           <div class="formGroup">
             <input type="button" class="btn btnPrimary" value="Ajouter"
-              (click)="authService.SignUp(userEmail.value, userPwd.value)" />
+              (click)="send(email.value, password.value)" />
           </div>
         </form>
       </div>

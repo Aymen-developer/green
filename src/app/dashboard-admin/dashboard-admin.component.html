@@ -1,92 +1,122 @@
-<nav class="navbar fixed-top navbar-dark bg-success justify-content-between py-0">
+<nav class="navbar fixed-top navbar-dark bg-primary justify-content-between py-0">
 
   <div>
     &nbsp;
-    <img src="/assets/img/logo.png" width="60" height="40" class="" alt="">
+    <img src="/assets/img/logo.png" width="55" height="40" class="" alt="">
 
   </div>
 
   <div>
-    <h5 id="step" class="text-center"> Profile</h5>
-    <h6 id="currentposition" class="text-center"> <img src="/assets/img/location.png" width="15" height="20"
-        class="d-inline-block align-top" alt="">position actuel</h6>
+    <h5 id="step" class="text-center">List des Problems</h5>
   </div>
 
-  <div class="text-center">
-    <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-      <button class="btn btn-outline-secondary me-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">
-        <img src="/assets/img/fr.png" width="30" height="25" class="rounded ms-auto" alt="">
-      </button>
-      <div ngbDropdownMenu aria-labelledby="dropdownManual">
-        <button ngbDropdownItem><img src="/assets/img/fr.png" width="30" height="25" class="rounded ms-auto" alt="">
-          Français</button>
-        <button ngbDropdownItem><img src="/assets/img/tn.png" width="30" height="25" class="rounded ms-auto" alt="">
-          عربي</button>
-        <button ngbDropdownItem><img src="/assets/img/en.png" width="30" height="25" class="rounded ms-auto" alt="">
-          English</button>
-      </div>
-    </div>
+  <div>
 
-    <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-      <button class="btn btn-outline-secondary me-2" id="dropdownManual2" ngbDropdownAnchor (focus)="myDrop.open()">
-        <img src="/assets/img/settings.png" width="30" height="25" alt="">
-      </button>
-      <div ngbDropdownMenu aria-labelledby="dropdownManual2">
-        <button ngbDropdownItem><img src="/assets/img/fr.png" width="30" height="25" class="rounded ms-auto" alt="">
-          Français</button>
-        <button ngbDropdownItem><img src="/assets/img/tn.png" width="30" height="25" class="rounded ms-auto" alt="">
-          عربي</button>
-        <button ngbDropdownItem><img src="/assets/img/en.png" width="30" height="25" class="rounded ms-auto" alt="">
-          English</button>
-      </div>
-    </div>
+
+  </div>
+
+  <div class="text-end">
+
+    <img src="/assets/img/location.png" width="20" height="25" class="d-inline-block align-top" alt=""> Borj Cedria
+
+    &nbsp;
+    <img src="/assets/img/fr.png" width="30" height="25" class="rounded ms-auto" routerLink="/" alt="">
+    &nbsp;
+    <img src="/assets/img/settings.png" width="30" height="25" routerLink="/" alt="">
+    &nbsp;
   </div>
 </nav>
+
+<style>
+  body {
+    margin: 0;
+    font-family: "Lato", sans-serif;
+  }
+
+  .sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #adb5bd;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+
+  .sidebar a.active {
+    background-color: cornflowerblue;
+    color: white;
+  }
+
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+
+    .sidebar a {
+      float: left;
+    }
+
+    div.content {
+      margin-left: 0;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+  }
+
+</style>
+
+<div class="sidebar">
+  <br>
+  <br>
+  <a routerLink="/add-admin"><img src="/assets/img/lreports.png" width="30" height="30" style=" float: left;"
+      alt="">&nbsp;&nbsp;Ajouter un administrateur</a>
+  <a class="active" (click)="authService.SignOut()">&nbsp;Déconnecter</a>
+
+</div>
+
 <br><br><br><br><br>
-<div class="container-fluids">
-  <div class="row">
-    <nav class="col-md-2 d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active">
-              <i class="fas fa-user"></i>Profile de L'Administrateur Principale
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active">
-              <span class="redirect" routerLink="/add-admin">Ajouter un administrateur</span>
-            </a>
-          </li>
-          <!-- Calling SignOut() Api from AuthService -->
-          <li class="nav-item">
-            <a class="nav-link active" (click)="authService.SignOut()">
-              <i class="fas fa-sign-out-alt"></i>Déconnecter
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <!-- Main content -->
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div class="inner-adjust">
-        <div class="pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Profile de L'Admin Principale</h1>
-        </div>
-        <!-- Show user data when logged in -->
-        <div class="row" *ngIf="authService.userData as user">
-          <div class="col-md-12">
-            <div class="media">
-              <img class="align-self-start mr-5 img-thumbnail rounded-circle"
-                src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" alt="{{user.displayName}}">
-              <div class="media-body">
-                <h1>Bonjour: <strong>Nom de l'Admin </strong></h1>
-                <p>Email: <strong>Admin email</strong></p>
-              </div>
-            </div>
-          </div>
+
+<div id="admin_acc" class="content">
+  <div>
+    <h1>Profile de L'Admin Principale</h1>
+  </div>
+  <!-- Show user data when logged in -->
+  <div *ngIf="authService.userData as user">
+    <div>
+      <div class="media">
+        <img class="align-self-start mr-5 img-thumbnail rounded-circle"
+          src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" alt="{{user.displayName}}">
+        <div class="media-body">
+          <h1>Bonjour: <strong>Nom de l'Admin </strong></h1>
+          <p>Email: <strong>Admin email</strong></p>
         </div>
       </div>
-    </main>
+    </div>
   </div>
 </div>

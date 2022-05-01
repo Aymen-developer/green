@@ -7,6 +7,8 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import 'firebase/compat/auth';
+import * as firebase from 'firebase/compat';
 @Injectable({
   providedIn: 'root',
 })
@@ -121,6 +123,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
+      password:user.password,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
     };
@@ -135,4 +138,13 @@ export class AuthService {
       this.router.navigate(['sign-in']);
     });
   }
+
+  updateUser(user:any){
+    return this.afAuth.updateCurrentUser(user)
+  }
+
+  deleteUser(str:string){
+   this.afAuth.currentUser
+    .then(function (str){
+    str?.delete();  })}
 }
